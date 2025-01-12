@@ -2,10 +2,10 @@ import java.util.Arrays;
 
 public class main {
     public static void main(String[] args){
-        int[] arr = {123, 34, -23, 900, 190, 4};
-        System.out.println(Arrays.toString(arr));
-        insertionSort(arr);
-        System.out.println(Arrays.toString(arr));
+        int[] arr = {8, 2, 6, 4, 9, 1,7,54,3,2,54,76,5,3,5,22,2,1,4,6};
+        System.out.println("Unsorted array: " + Arrays.toString(arr));
+        mergeSort(arr, 0, arr.length-1);
+        System.out.println("Sorted array: " + Arrays.toString(arr));
     }
 
     /**
@@ -66,7 +66,7 @@ public class main {
      */
     public static void selectionSort(int[] arr){
         // loop through entire array
-        for (int i = 0; i < arr.length; i++) {
+        for (int i = 0; i < arr.length-1; i++) {
             int minIndex = i; // set the current index as the minimum
 
             // loop through the unsorted elements
@@ -89,19 +89,90 @@ public class main {
      * @param arr
      */
     public static void insertionSort(int[] arr){
-        // loop through entire array
-        for (int i = 0; i < arr.length; i++) {
-            // loop backwards from i to find
-            // where to insert the element at i
-            for (int j = i; j > 0; j--) {
-                // place element at i after element smaller than it
-                // and before element greater than it
-                if(arr[j] < arr[j-1]){
-                    int temp = arr[j];
-                    arr[j] = arr[j-1];
-                    arr[j-1] = temp;
-                }
+        // loop through array starting from second element
+        for (int i = 1; i < arr.length; i++) {
+            int key = arr[i]; // set element at i as key
+
+            // loop backwards through sorted elements to find
+            // where to insert the key element
+            int j = i-1;
+
+            while (j >= 0 && key < arr[j]) {
+                // move element greater than key to the right
+                arr[j+1] = arr[j];
+                j--;
             }
+
+            arr[j+1] = key;
+        }
+    }
+
+    static void merge (int arr[], int start, int mid, int end){
+        // create backups of two subarrays
+        int[] left = new int[(mid - start) + 1];
+        int[] right = new int[end - mid];
+
+        // copy values into left array
+        for(int i = 0; i < left.length; i++){
+            left[i] = arr[i+start];
+        }
+
+        // copy values into right array
+        for(int i = 0; i < right.length; i++){
+            right[i] = arr[i+mid+1];
+        }
+
+        // set the values from start to end in sorted order, as long
+        // as there are still elements in both the left and right subarrays
+        int j = start, lIndex = 0, rIndex = 0; // we will maintain for the left and right subarrays, and the main array
+
+        while(lIndex < left.length && rIndex < right.length){
+            if(left[lIndex] <= right[rIndex]){
+                arr[j] = left[lIndex];
+                lIndex++;
+            }else {
+                arr[j] = right[rIndex];
+                rIndex++;
+            }
+
+            j++;
+        }
+
+        // add leftover values from left subarray if any// create backups of two subarrays
+        while (lIndex < left.length) {
+            arr[j] = left[lIndex];
+            lIndex++;
+            j++;
+        }
+
+        // add leftover values from right subarray if any// create backups of two subarrays
+        while (rIndex < right.length) {
+            arr[j] = right[rIndex];
+            rIndex++;
+            j++;
+        }
+    }
+
+    /**
+     * In merge sort, the provided array is recursively divided into two halves, and each half is sorted.
+     * Each sorted half is then combined to give a sorted list.
+     * @param arr the unsorted array
+     * @param start the position to start sorting from
+     * @param end the end position of the sorting
+     */
+    static void mergeSort(int arr[], int start, int end){
+        // base condition; will execute only if start is less than end,
+        // i.e. there's more than element in the array/subarray
+        if(start < end){
+            // find the midpoint of the array
+            int mid = (start + end) / 2;
+
+            // divide further since we have not reached the base case
+            mergeSort(arr, start, mid);
+            mergeSort(arr, mid + 1, end);
+
+            // merge the two sorted sections
+            merge(arr, start, mid, end);
         }
     }
 }
