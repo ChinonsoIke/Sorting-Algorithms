@@ -2,9 +2,9 @@ import java.util.Arrays;
 
 public class main {
     public static void main(String[] args){
-        int[] arr = {8, 2, 6, 4, 9, 1,7,54,3,2,54,76,5,3,5,22,2,1,4,6};
+        int[] arr = {8,6,2,3,9,4};
         System.out.println("Unsorted array: " + Arrays.toString(arr));
-        mergeSort(arr, 0, arr.length-1);
+        quickSort(arr, 0, arr.length-1);
         System.out.println("Sorted array: " + Arrays.toString(arr));
     }
 
@@ -108,7 +108,7 @@ public class main {
     }
 
     static void merge (int arr[], int start, int mid, int end){
-        // create backups of two subarrays
+        // create backups of the two subarrays
         int[] left = new int[(mid - start) + 1];
         int[] right = new int[end - mid];
 
@@ -124,7 +124,8 @@ public class main {
 
         // set the values from start to end in sorted order, as long
         // as there are still elements in both the left and right subarrays
-        int j = start, lIndex = 0, rIndex = 0; // we will maintain for the left and right subarrays, and the main array
+        int j = start, lIndex = 0, rIndex = 0; // we will maintain pointers to track
+        // the current index of the left and right subarrays, and the main array
 
         while(lIndex < left.length && rIndex < right.length){
             if(left[lIndex] <= right[rIndex]){
@@ -138,14 +139,14 @@ public class main {
             j++;
         }
 
-        // add leftover values from left subarray if any// create backups of two subarrays
+        // add leftover values from left subarray if any
         while (lIndex < left.length) {
             arr[j] = left[lIndex];
             lIndex++;
             j++;
         }
 
-        // add leftover values from right subarray if any// create backups of two subarrays
+        // add leftover values from right subarray if any
         while (rIndex < right.length) {
             arr[j] = right[rIndex];
             rIndex++;
@@ -173,6 +174,43 @@ public class main {
 
             // merge the two sorted sections
             merge(arr, start, mid, end);
+        }
+    }
+
+    public static int partition(int[] arr, int start, int end){
+        // set the last element as the pivot
+        int pivot = arr[end];
+        // create a pointer for the next greater element
+        int secondPointer = start-1;
+
+        // move smaller elements to the left of the pivot
+        for (int i = start; i < end; i++) {
+            if(arr[i] < pivot){
+                secondPointer++;
+                int temp = arr[i];
+                arr[i] = arr[secondPointer];
+                arr[secondPointer] = temp;
+            }
+        }
+
+        // swap the pivot with the second pointer
+        secondPointer++;
+        int temp = arr[end];
+        arr[end] = arr[secondPointer];
+        arr[secondPointer] = temp;
+
+        // return the partition position
+        return secondPointer;
+    }
+
+    public static void quickSort(int[] arr, int start, int end){
+        if(start < end){
+            // divide the array into two sub arrays and get the partition index
+            int partition = partition(arr, start, end);
+
+            // recursively sort the two sub arrays
+            quickSort(arr, start, partition - 1);
+            quickSort(arr, partition + 1, end);
         }
     }
 }

@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d28cd94b-26ba-495a-b85d-8a08389a2d89" name="Changes" comment="add bubble, selection, insertion">
+    <list default="true" id="d28cd94b-26ba-495a-b85d-8a08389a2d89" name="Changes" comment="add merge sort">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.java" afterDir="false" />
     </list>
@@ -70,12 +70,21 @@
       <option name="project" value="LOCAL" />
       <updated>1734325274048</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="add merge sort">
+      <option name="closed" value="true" />
+      <created>1736646108344</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1736646108344</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add bubble, selection, insertion" />
-    <option name="LAST_COMMIT_MESSAGE" value="add bubble, selection, insertion" />
+    <MESSAGE value="add merge sort" />
+    <option name="LAST_COMMIT_MESSAGE" value="add merge sort" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -87,8 +96,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main.java</url>
-          <line>162</line>
+          <line>166</line>
           <option name="timeStamp" value="25" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main.java</url>
+          <line>206</line>
+          <option name="timeStamp" value="30" />
         </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">
           <properties class="java.lang.StackOverflowError" package="java.lang" />
